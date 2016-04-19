@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Zoolzphp by bkd27</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Zoolzphp</h1>
+        <h2>A PHP class built to interface with the Zoolz API</h2>
+        <a href="https://github.com/bkd27/ZoolzPHP" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="zoolzphp" class="anchor" href="#zoolzphp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ZoolzPHP</h1>
+
+<p>A PHP class built to interface with the Zoolz API (<a href="http://wiki.zoolz.com/category/reseller/reseller-api/">http://wiki.zoolz.com/category/reseller/reseller-api/</a>)</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<h3>
+<a id="using-composer" class="anchor" href="#using-composer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Using Composer</h3>
+
+<p>Begin by installing this package through Composer. Edit your project's <code>composer.json</code> file to require <code>bkd/zoolzphp</code>.</p>
+
+<pre><code>"require": {
+    "bkd/zoolzphp": "1.0.*"
+}
+</code></pre>
+
+<p>Next, update Composer from the Terminal:</p>
+
+<pre><code>composer update
+</code></pre>
+
+<h3>
+<a id="non-composer-installation" class="anchor" href="#non-composer-installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Non-Composer Installation</h3>
+
+<ul>
+<li>Grab the <code>src/ZoolzPHP.php</code>file and place it into your file structure.</li>
+<li>Require ZoolzPHP in the location you would like to utilize it.</li>
+</ul>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1">    <span class="pl-k">require</span>(<span class="pl-s"><span class="pl-pds">'</span>ZoolzPHP.php<span class="pl-pds">'</span></span>);</span></pre></div>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h1>
+
+<p>Create an instance of the class while passing in an array including your wsdl service URL and the authToken to work with.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$config_wsdl_url</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>your_wsdl_service_url_HERE<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">//$config_wsdl_url = "http://cloud2.zoolz.com/Services/Reseller/Service.asmx?wsdl";</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$config_authToken</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>your_auth_token_HERE<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">//$config_authToken =   '0a2cbe7c787711e3931322000a1e8728';</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$zoolz</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">ZoolzPHP</span>(<span class="pl-smi">$config_wsdl_url</span>, <span class="pl-smi">$config_authToken</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// Tell the library to output debug info</span></span>
+<span class="pl-s1">    <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>debug(<span class="pl-c1">true</span>);</span>
+<span class="pl-s1"></span></pre></div>
+
+<h1>
+<a id="methods" class="anchor" href="#methods" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Methods</h1>
+
+<p>After creating a new instance of ZoolzPHP call any of the methods below </p>
+
+<h2>
+<a id="getplaninfoint-plan_id" class="anchor" href="#getplaninfoint-plan_id" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GetPlanInfo(int $plan_ID)</h2>
+
+<p>This method takes an int value <code>$plan_ID</code> and will attempt to get information of that Plan in Zoolz reseller account.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>GetPlanInfo(<span class="pl-s"><span class="pl-pds">'</span>331<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="createaccountarray-parameters" class="anchor" href="#createaccountarray-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CreateAccount(array $parameters)</h2>
+
+<p>This method takes an array values <code>$parameters</code> for new account creation and will attempt to crate account in Zoolz reseller account.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$parameters_create_account</span> <span class="pl-k">=</span> <span class="pl-k">array</span> (</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span>  <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>bharat<span class="pl-pds">'</span></span>, <span class="pl-c">//required </span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>email<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span>bharatkumardhaker@gmail.com<span class="pl-pds">'</span></span>, <span class="pl-c">//required </span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>password<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span>testbharat<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>planID<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>331<span class="pl-pds">'</span></span>,      <span class="pl-c">// the ID number for their plan</span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>sendEmail<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-c1">true</span>,</span>
+<span class="pl-s1">                <span class="pl-c">//'Language'=&gt;$Language,</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            );</span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>CreateAccount(<span class="pl-smi">$parameters_create_account</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="createaccountwithlanguagearray-parameters" class="anchor" href="#createaccountwithlanguagearray-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CreateAccountWithLanguage(array $parameters)</h2>
+
+<p>This method takes an array values <code>$parameters</code> for new account creation and will attempt to crate account in Zoolz reseller account.
+Here is language code: 
+1 = English
+3 = French 
+5 = Polish
+6 = Finnish</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$parameters_create_account</span> <span class="pl-k">=</span> <span class="pl-k">array</span> (</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span>  <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>bharat<span class="pl-pds">'</span></span>, <span class="pl-c">//required </span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>email<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span>bharatkumardhaker@gmail.com<span class="pl-pds">'</span></span>, <span class="pl-c">//required </span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>password<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span>testbharat<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>planID<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>331<span class="pl-pds">'</span></span>,      <span class="pl-c">// the ID number for their plan</span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>sendEmail<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-c1">true</span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>Language<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-smi">$Language</span>, <span class="pl-c">//int</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            );</span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>CreateAccountWithLanguage(<span class="pl-smi">$parameters_create_account</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="createaccountwithnetworkdrivearray-parameters" class="anchor" href="#createaccountwithnetworkdrivearray-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CreateAccountWithNetworkDrive(array $parameters)</h2>
+
+<p>This method takes an array values <code>$parameters</code> for new account creation and will attempt to crate account in Zoolz reseller account.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$parameters_create_account</span> <span class="pl-k">=</span> <span class="pl-k">array</span> (</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span>  <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>bharat<span class="pl-pds">'</span></span>, <span class="pl-c">//required </span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>email<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span>bharatkumardhaker@gmail.com<span class="pl-pds">'</span></span>, <span class="pl-c">//required </span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>password<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span>testbharat<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>planID<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>331<span class="pl-pds">'</span></span>,      <span class="pl-c">// the ID number for their plan</span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>sendEmail<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-c1">true</span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>Language<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-smi">$Language</span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>enableNetworkDrive<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-c1">true</span>, <span class="pl-c">//Boolean</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            );</span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>CreateAccountWithNetworkDrive(<span class="pl-smi">$parameters_create_account</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="createaccountwithcomputerslimitarray-parameters" class="anchor" href="#createaccountwithcomputerslimitarray-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CreateAccountWithComputersLimit(array $parameters)</h2>
+
+<p>This method takes an array values <code>$parameters</code> for new account creation and will attempt to crate account in Zoolz reseller account.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$parameters_create_account</span> <span class="pl-k">=</span> <span class="pl-k">array</span> (</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span>  <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>bharat<span class="pl-pds">'</span></span>, <span class="pl-c">//required </span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>email<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span>bharatkumardhaker@gmail.com<span class="pl-pds">'</span></span>, <span class="pl-c">//required </span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>password<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span>testbharat<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>planID<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>331<span class="pl-pds">'</span></span>,      <span class="pl-c">// the ID number for their plan</span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>sendEmail<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-c1">true</span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>Language<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-smi">$Language</span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>enableNetworkDrive<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-c1">true</span>, <span class="pl-c">//Boolean</span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>computersLimit<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-c1">1</span>, <span class="pl-c">//int</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            );</span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>CreateAccountWithComputersLimit(<span class="pl-smi">$parameters_create_account</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="createplanarray-parameters" class="anchor" href="#createplanarray-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CreatePlan(array $parameters)</h2>
+
+<p>This method takes an array values <code>$parameters</code> for new plan creation and will attempt to create new plans under the reseller account, giving the ability to choose the allowed instant and cold storage space, the number of users and server allowed, and the subscription frequency.</p>
+
+<p>Plan Type It determines the plan type, when set to 0 the plan type will be Home plan, and when set to 1 the plan type will be Business plan, this value must be passed as integer.</p>
+
+<p>Frequency
+Passed as integer, this will set the frequency time for the plan, as shown below:
+0 = Trial
+1 = Free 
+2 = Monthly
+3 = Yearly</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$parameters</span> <span class="pl-k">=</span> <span class="pl-k">array</span> (</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>planName<span class="pl-pds">'</span></span>  <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>bharat<span class="pl-pds">'</span></span>, <span class="pl-c">//required </span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>instantStorageGB<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>, <span class="pl-c">//int</span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>coldStorageGB<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>, <span class="pl-c">//int</span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>users<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>,      <span class="pl-c">// int</span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>servers<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>, <span class="pl-c">//int</span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>type<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span>, <span class="pl-c">//int</span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>frequency<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span>, <span class="pl-c">//int</span></span>
+<span class="pl-s1">            );</span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>CreatePlan(<span class="pl-smi">$parameters</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="upgradeaccountarray-parameters" class="anchor" href="#upgradeaccountarray-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>UpgradeAccount(array $parameters)</h2>
+
+<p>Use this API to update user’s storage, users by assigning a different plan to a user account.</p>
+
+<p>Plan ID The plan you wish to assign/upgrade the user to. You will need to create plans on the reseller system prior using this option and pass the ID number as an integer.</p>
+
+<p>Note Upgrading the account via will not change the expiry date of the account. To update this information, you will need to call the Change Account Expiry Date API.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$parameters</span> <span class="pl-k">=</span> <span class="pl-k">array</span> (</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>email<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>, <span class="pl-c">//required </span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>planID<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>, <span class="pl-c">//int</span></span>
+<span class="pl-s1">            );</span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>UpgradeAccount(<span class="pl-smi">$parameters</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="upgradeaccountusingaccountidarray-parameters" class="anchor" href="#upgradeaccountusingaccountidarray-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>UpgradeAccountUsingAccountID(array $parameters)</h2>
+
+<p>Use this API to update user’s storage, users by assigning a different plan to a user account.</p>
+
+<p>Plan ID The plan you wish to assign/upgrade the user to. You will need to create plans on the reseller system prior using this option and pass the ID number as an integer.</p>
+
+<p>Note Upgrading the account via will not change the expiry date of the account. To update this information, you will need to call the Change Account Expiry Date API.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$parameters</span> <span class="pl-k">=</span> <span class="pl-k">array</span> (</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>accountID<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>, <span class="pl-c">//required </span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>planID<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>, <span class="pl-c">//int</span></span>
+<span class="pl-s1">            );</span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>UpgradeAccountUsingAccountID(<span class="pl-smi">$parameters</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="changeaccountexpirydatearray-parameters" class="anchor" href="#changeaccountexpirydatearray-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ChangeAccountExpiryDate(array $parameters)</h2>
+
+<p>Use this API if you wish to change the expiry date of the account.
+Note: Accounts that have been expired for more than 30 days may be subjected to deletion.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$parameters</span> <span class="pl-k">=</span> <span class="pl-k">array</span> (</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>email<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>, <span class="pl-c">//required </span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>expiryDate<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>, <span class="pl-c">//int</span></span>
+<span class="pl-s1">            );</span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>ChangeAccountExpiryDate(<span class="pl-smi">$parameters</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="changeaccountexpirydateusingaccountidarray-parameters" class="anchor" href="#changeaccountexpirydateusingaccountidarray-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ChangeAccountExpiryDateUsingAccountID(array $parameters)</h2>
+
+<p>Use this API if you wish to change the expiry date of the account.
+Note: Accounts that have been expired for more than 30 days may be subjected to deletion.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$parameters</span> <span class="pl-k">=</span> <span class="pl-k">array</span> (</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>accountID<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>, <span class="pl-c">//required </span></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>expiryDate<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>, <span class="pl-c">//int</span></span>
+<span class="pl-s1">            );</span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>ChangeAccountExpiryDateUsingAccountID(<span class="pl-smi">$parameters</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="suspendaccountstring-email" class="anchor" href="#suspendaccountstring-email" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SuspendAccount(string $email)</h2>
+
+<p>Use this API to suspend a specific account, if it fails to commit payment for example or upon request.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>SuspendAccount(<span class="pl-smi">$email</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="suspendaccountusingaccountidint-accountid" class="anchor" href="#suspendaccountusingaccountidint-accountid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SuspendAccountUsingAccountID(int $accountID)</h2>
+
+<p>Use this API to suspend a specific account, if it fails to commit payment for example or upon request.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>SuspendAccountUsingAccountID(<span class="pl-smi">$accountID</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="activateaccountstring-email" class="anchor" href="#activateaccountstring-email" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ActivateAccount(string $email)</h2>
+
+<p>Use this API to activate a suspended account.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>ActivateAccount(<span class="pl-smi">$email</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="activateaccountusingaccountidint-accountid" class="anchor" href="#activateaccountusingaccountidint-accountid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ActivateAccountUsingAccountID(int $accountID)</h2>
+
+<p>Use this API to activate a suspended account.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>ActivateAccountUsingAccountID(<span class="pl-smi">$accountID</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="togglenetworkdriveint-accountid-boolean-isenabled" class="anchor" href="#togglenetworkdriveint-accountid-boolean-isenabled" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ToggleNetworkDrive(int $accountID, boolean $isEnabled)</h2>
+
+<p>Use this API to activate the ability to use external/network drives for a certain user.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>ToggleNetworkDrive(<span class="pl-smi">$accountID</span>, <span class="pl-smi">$isEnabled</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="deleteaccountstring-email" class="anchor" href="#deleteaccountstring-email" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>DeleteAccount(string $email)</h2>
+
+<p>Use this API to delete a specific account.
+Important: Deleting an account will remove all account information and backed up data, so use this API with caution.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>DeleteAccount(<span class="pl-smi">$email</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="deleteaccountusingaccountidint-accountid" class="anchor" href="#deleteaccountusingaccountidint-accountid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>DeleteAccountUsingAccountID(int $accountID)</h2>
+
+<p>Use this API to delete a specific account.
+Important: Deleting an account will remove all account information and backed up data, so use this API with caution.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>DeleteAccountUsingAccountID(<span class="pl-smi">$accountID</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="getaccountinfostring-email" class="anchor" href="#getaccountinfostring-email" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GetAccountInfo(string $email)</h2>
+
+<p>Here you can request account information about a specific user, such as storage space, used space, registration end date and last activity.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>GetAccountInfo(<span class="pl-smi">$email</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="getaccountinfousingemailandpassstring-email-string-password-" class="anchor" href="#getaccountinfousingemailandpassstring-email-string-password-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GetAccountInfoUsingEmailAndPass(string $email, string password )</h2>
+
+<p>Here you can request account information about a specific user, such as storage space, used space, registration end date and last activity.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>GetAccountInfoUsingEmailAndPass(<span class="pl-smi">$email</span>, <span class="pl-smi">$password</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="getaccountinfousingaccountidint-accountid" class="anchor" href="#getaccountinfousingaccountidint-accountid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GetAccountInfoUsingAccountID(int $accountID)</h2>
+
+<p>Here you can request account information about a specific user, such as storage space, used space, registration end date and last activity.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>GetAccountInfoUsingAccountID(<span class="pl-smi">$accountID</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+
+<h2>
+<a id="resetpasswordstring-email-string-password-" class="anchor" href="#resetpasswordstring-email-string-password-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ResetPassword(string $email, string password )</h2>
+
+<p>To change user password using email id. </p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$return</span> <span class="pl-k">=</span> <span class="pl-smi">$zoolz</span><span class="pl-k">-&gt;</span>ResetPassword(<span class="pl-smi">$email</span>, <span class="pl-smi">$password</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;pre&gt;<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1">    <span class="pl-c1">print_r</span>(<span class="pl-smi">$return</span>);</span>
+<span class="pl-s1">     <span class="pl-c1">print</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;/pre&gt;<span class="pl-pds">"</span></span>;    </span>
+<span class="pl-s1"></span></pre></div>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/bkd27/ZoolzPHP/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/bkd27/ZoolzPHP/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/bkd27/ZoolzPHP"></a> is maintained by <a href="https://github.com/bkd27">bkd27</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
