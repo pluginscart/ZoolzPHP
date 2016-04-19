@@ -33,8 +33,25 @@ Create an instance of the class while passing in an array including your wsdl se
 
 	$config_wsdl_url = 'your_wsdl_service_url_HERE'
 	$config_authToken = 'your_auth_token_HERE'
-	$zoolz = new \ZoolzPHP\ZoolzPHP($config_wsdl_url, $config_authToken);
+	$zoolz = new ZoolzPHP($config_wsdl_url, $config_authToken);
 	
-	//you can change the list_id you are referring to at any point
-	$zoolz->GetPlanInfo("plan_id");
+	// Tell the library to output debug info
+	$zoolz->debug(true);
+	
+```
+
+#Methods
+After creating a new instance of ZoolzPHP call any of the methods below 
+
+##GetPlanInfo(int $plan_ID)
+
+This method takes an int value `$plan_ID` and will attempt to get information of that Plan in Zoolz reseller account.
+
+```php
+
+	$zoolz->GetPlanInfo('331');
+	print "<pre>\n";
+	print_r($users);
+	print "</pre>";
+	
 ```

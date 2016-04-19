@@ -1,8 +1,8 @@
 {
     "name": "bkd/zoolzphp",
-    "description": "A PHP Library for interfacing with the Zoolz newsletter system (http://sendy.co)",
+    "description": "A PHP Library for interfacing with the Zoolz Reseller (http://wiki.zoolz.com/category/reseller/reseller-api/)",
     "keywords": ["Zoolz", "Reseller"],
-    "license": "GNU3",
+    "license": "GNU GPLv3",
     "authors": [
         {
             "email": "bharatkumardhaker@gmail.com", 
