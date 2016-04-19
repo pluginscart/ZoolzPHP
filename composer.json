@@ -1,0 +1,25 @@
+{
+    "name": "bkd/zoolzphp",
+    "description": "A PHP Library for interfacing with the Zoolz newsletter system (http://sendy.co)",
+    "keywords": ["Zoolz", "Reseller"],
+    "license": "GNU3",
+    "authors": [
+        {
+            "email": "bharatkumardhaker@gmail.com", 
+            "name": "Bharat Kumar Dhaker",
+            "homepage": "http://bkd27.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "1.*",
+        "phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "ZoolzPHP\\": "src/"
+        }
+    }
+}
