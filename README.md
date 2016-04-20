@@ -3,6 +3,8 @@ ZoolzPHP
 
 A PHP class built to interface with the Zoolz API ([http://wiki.zoolz.com/category/reseller/reseller-api/](http://wiki.zoolz.com/category/reseller/reseller-api/))
 
+([http://pluginscart.github.io/ZoolzPHP](http://pluginscart.github.io/ZoolzPHP))
+
 ## Installation
 
 ### Using Composer
