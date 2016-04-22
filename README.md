@@ -64,6 +64,19 @@ This method takes an int value `$plan_ID` and will attempt to get information of
 	
 ```
 
+##GetPlansInfo()
+
+This method will attempt to get information of all Plans in Zoolz reseller account.
+
+```php
+
+	$return = $zoolz->GetPlansInfo();
+	print "<pre>\n";
+	print_r($return);
+	print "</pre>";
+	
+```
+
 ##CreateAccount(array $parameters)
 
 This method takes an array values `$parameters` for new account creation and will attempt to crate account in Zoolz reseller account.

@@ -449,7 +449,7 @@ class ZoolzPHP
 
 	}
 	
-	public function GetPlanInfos(){
+	public function GetPlansInfo(){
 		try{
 			
 			$parameters = array (
@@ -458,7 +458,7 @@ class ZoolzPHP
 		
 			);
 									   
-			return $this->client->GetPlanInfos($parameters);
+			return $this->client->GetPlansInfo($parameters);
 			
 		}
 		catch(Exception $e){
